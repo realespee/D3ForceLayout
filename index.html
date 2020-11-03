@@ -29,8 +29,8 @@
                 // .on('tick', update)  
 
         Promise.all([
-            d3.csv("http://mujerry.com/static/files/net_AllClasses_citationNodes.csv"),
-            d3.csv("http://mujerry.com/static/files/net_AllClasses_citationEdges.csv"),
+            d3.csv("https://mujerry.com/static/files/net_AllClasses_citationNodes.csv"),
+            d3.csv("https://mujerry.com/static/files/net_AllClasses_citationEdges.csv"),
         ]).then(function(data) {
             
             var nodes = data[0],
