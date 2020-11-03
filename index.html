@@ -11,29 +11,7 @@
     <canvas id='network' width='800' height='600'></canvas>
 
     <script>
-        var graph = {
-            nodes : [
-                {'name': 'Jake', 'age':23},
-                {'name': 'Joseph', 'age':3},
-                {'name': 'Jaquelin', 'age':18},
-                {'name': 'Jody', 'age':35},
-                {'name': 'Jimmy', 'age':22},
-                {'name': 'Jack', 'age':21},
-                {'name': 'Jeremy', 'age':28}
-            ],
-
-            links : [
-                {'source': 'Jaquelin', 'target' : 'Jack'},
-                {'source': 'Jeremy', 'target' : 'Jaquelin'},
-                {'source': 'Jimmy', 'target' : 'Jack'},
-                {'source': 'Jody', 'target' : 'Joseph'},
-                {'source': 'Jaquelin', 'target' : 'Jake'},
-                {'source': 'Jody', 'target' : 'Jake'},
-                {'source': 'Jaquelin', 'target' : 'Jake'},
-                {'source': 'Joseph', 'target' : 'Jack'}
-            ]
-        }
-
+     
         var canvas = d3.select("#network")
         var r=3,
             width = canvas.attr('width'),
@@ -50,43 +28,12 @@
                 // .on('tick', update)  
 
         Promise.all([
-            d3.csv("/citationNodes.csv"),
-            d3.csv("/citationEdges.csv"),
+            d3.csv("http://mujerry.com/static/files/net_AllClasses_citationNodes.csv"),
+            d3.csv("http://mujerry.com/static/files/net_AllClasses_citationEdges.csv"),
         ]).then(function(data) {
             
             var nodes = data[0],
                 links = data[1]
-
-            // console.log(nodes, links)
-
-            // var nodes_array = [],
-            //     links_array = [],
-
-            //     pubNum_list = [],
-            //     citing_list = []
-            
-            
-            // for(i=0;i<nodes.length;i++){
-            //     pubNum_list.push(nodes[i].PubNum);
-            // }
-
-            // for(j=0;j<links.length;j++){
-            //     citing_list.push(links[j].Citing)
-            // }
-
-            // console.log(citing_list.length)
-            // console.log(pubNum_list.length)
-
-            //Return only unique elements of the arrays
-            // pubNum_list = pubNum_list.filter((v, i, a) => a.indexOf(v) === i);
-            // citing_list = citing_list.filter((v, i, a) => a.indexOf(v) === i);
-           
-        //    console.log(citing_list)
-            // console.log(pubNum_list.length)
-            // console.log(citing_list.length)
-            // function isEqual(objList){
-            //     objList.forEach()
-            // }
             
 
             simulation
@@ -95,11 +42,6 @@
                 .on('tick', update)
                 .force('link')
                     .links(links)
-
-        // graph.nodes.forEach(function(d){
-        //     d.x = Math.random() * width;
-        //     d.y = Math.random() * height;
-        // })
 
             function update(){
                 ctx.clearRect(0, 0, width, height)
